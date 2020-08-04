@@ -1,0 +1,35 @@
+[all:vars]
+as_number		= 65001
+ntp_server 		= ''
+snmp_comstring 	= 'public'
+fabric_mtu		= 9216
+host_mtu		= 9000
+spine_rr		= '1.2.0.11'
+leaf_client 	= '1.2.0.1,1.2.0.2,1.2.0.3'
+
+[spine:vars]
+isl 			= 'swp1,swp2,swp3'
+
+[spine:children]
+spine1
+
+
+[spine1]
+10.0.20.14 hostname=spine1 gateway=10.0.20.1 loopback=1.2.0.11 ansible_ssh_user=cumulus ansible_ssh_pass=CumulusLinux! ansible_sudo_pass=CumulusLinux!
+
+[leaf:vars]
+isl				= 'swp1'
+
+[leaf:children]
+leaf1
+leaf2
+leaf3
+
+[leaf1]
+10.0.20.11 hostname=leaf1 gateway=10.0.20.1 loopback=1.2.0.1 ansible_ssh_user=cumulus ansible_ssh_pass=CumulusLinux! ansible_sudo_pass=CumulusLinux!
+
+[leaf2]
+10.0.20.12 hostname=leaf2 gateway=10.0.20.1 loopback=1.2.0.2 ansible_ssh_user=cumulus ansible_ssh_pass=CumulusLinux! ansible_sudo_pass=CumulusLinux!
+
+[leaf3]
+10.0.20.13 hostname=leaf3 gateway=10.0.20.1 loopback=1.2.0.3 ansible_ssh_user=cumulus ansible_ssh_pass=CumulusLinux! ansible_sudo_pass=CumulusLinux!
