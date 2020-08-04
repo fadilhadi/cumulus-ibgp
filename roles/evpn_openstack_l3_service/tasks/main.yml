@@ -1,0 +1,6 @@
+- name: Configure Exit Point
+  nclu:
+    template: |
+      add interface {{ if_exit }} bridge access {{ vlan }}
+      add vlan {{ vlan }} ip address {{ test_ip }}
+    commit: true
